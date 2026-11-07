@@ -1,0 +1,87 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "PenStudy Studio",
+  "version": "0.1.0",
+  "identifier": "com.penstudy.studio.desktop",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "label": "main",
+        "title": "PenStudy Studio",
+        "width": 1060,
+        "height": 720,
+        "minWidth": 820,
+        "minHeight": 580,
+        "backgroundColor": "#0c1424"
+      },
+      {
+        "label": "overlay",
+        "url": "overlay.html",
+        "title": "PenStudy Ink Overlay",
+        "width": 1200,
+        "height": 800,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "shadow": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "resizable": false
+      },
+      {
+        "label": "toolbar",
+        "url": "toolbar.html",
+        "title": "PenStudy Ink Tools",
+        "width": 482,
+        "height": 76,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "shadow": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "resizable": false,
+        "minimizable": false,
+        "maximizable": false
+      },
+      {
+        "label": "toolbar-right",
+        "url": "toolbar.html",
+        "title": "PenStudy Right Ink Tools",
+        "width": 812,
+        "height": 76,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "shadow": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "resizable": false,
+        "minimizable": false,
+        "maximizable": false
+      }
+    ]
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "nsis"
+    ],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.png",
+      "icons/icon.ico"
+    ]
+  }
+}

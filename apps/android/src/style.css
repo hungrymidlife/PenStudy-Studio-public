@@ -1,0 +1,178 @@
+:root{font-family:'Segoe UI','Noto Sans KR',system-ui,sans-serif;color:#e6efff;background:#0b1423;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.35}.shell{padding:15px 16px max(20px,env(safe-area-inset-bottom));max-width:960px;margin:auto}.top{display:flex;align-items:center;gap:10px;padding:0 0 17px}.appmark{background:linear-gradient(135deg,#397bdd,#8e6fe3);border-radius:12px;width:43px;height:43px;display:grid;place-items:center}.top h1{font-size:19px;letter-spacing:-.4px;margin:0}.top h1 span{font-weight:400;color:#89b8ff}.top p{color:#8092af;font-size:10px;margin:4px 0 0}.pill{margin-left:auto;background:#243248;color:#a5b1c5;border-radius:20px;padding:7px 11px;font-size:10px;white-space:nowrap}.pill.connected{background:#11473f;color:#83efc3}.dot{display:inline-block;height:6px;width:6px;background:currentColor;border-radius:50%;margin-right:6px}.connect,.tools,.drawing{background:#132137;border:1px solid #2a3f5d;border-radius:15px;padding:14px;margin-bottom:13px}.connect-title,.sectiontitle{display:flex;align-items:center;gap:8px;color:#a2d0ff;font-size:12px;margin-bottom:11px}.connect-title b{color:#e0ecff}.sectiontitle{justify-content:space-between}.sectiontitle span{display:flex;align-items:center;gap:8px}.sub{color:#6c84a6;font-size:11px}.textbtn{background:none;color:#a0badd;border:0;margin-left:auto;display:flex;align-items:center;gap:5px;font-size:12px}.connect-form label{display:block;color:#90a4c2;font-size:10px;margin:9px 0 6px}.connect-form input{width:100%;color:#e0efff;border-radius:9px;background:#0c1728;border:1px solid #294363;padding:11px 12px;outline:none;font-size:13px}.connect-form input:focus{border-color:#3e8ce7}.primary{width:100%;border:0;border-radius:9px;background:#367fdc;color:#fff;padding:12px;font-weight:700;margin-top:11px;display:flex;justify-content:center;gap:8px;align-items:center}.disconnect{margin-top:7px;padding:7px 9px;background:#422638;border:1px solid #684057;color:#ffb7bd;border-radius:8px;display:flex;gap:7px;align-items:center;font-size:11px}.notice{font-size:10px;color:#97acca;line-height:1.5;margin:10px 0 0}.padwrap{width:100%;position:relative;border-radius:11px;overflow:hidden;border:1px dashed #476485;background-color:#111e33;background-image:linear-gradient(#789bc20c 1px,transparent 1px),linear-gradient(90deg,#789bc20c 1px,transparent 1px);background-size:22px 22px}.pad{display:block;width:100%;height:100%;touch-action:none}.padmask{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;background:#111e33c7;color:#a5b9d9}.padmask b{font-size:12px}.padmask span{font-size:10px}.padtip{color:#718dae;font-size:10px;display:flex;align-items:center;gap:6px;margin-bottom:0}.palette{display:flex;gap:11px;margin:8px 0 16px}.color{width:28px;height:28px;border:2px solid transparent;border-radius:50%}.color.selected{outline:2px solid #7ab0ff;outline-offset:3px}.tools input[type=range]{width:100%;accent-color:#56a3ff}.toggle{display:flex;align-items:center;gap:8px;font-size:11px;color:#b7c9df;margin:11px 0 17px}.toggle input{accent-color:#418ce9}.buttons{display:grid;grid-template-columns:1fr 1fr 1.6fr;gap:7px}.buttons button{border-radius:9px;border:1px solid #334c6a;background:#1c324e;color:#d1e6ff;display:flex;gap:5px;justify-content:center;align-items:center;padding:12px 6px;font-size:11px}.buttons .save{background:#316ec0;color:#fff;border-color:#427fce;font-weight:700}footer{text-align:center;font-size:10px;color:#637c9c;margin:20px 0}@media(orientation:landscape){.shell{max-width:1200px;display:grid;grid-template-columns:1fr 1fr;gap:10px}.top{grid-column:1/-1;padding-bottom:0}.drawing{grid-column:1/-1;grid-row:3}.connect,.tools{margin:0}.drawing{margin:0}.padwrap{max-height:43vh;margin:auto;width:auto;height:43vh}footer{grid-column:1/-1;margin:0}}
+
+
+/* Pen-first canvas: normal controls remain available when full-screen is OFF. */
+.pad-heading-actions{display:flex;align-items:center;gap:10px}
+.fullpad-toggle,.fullpad-exit{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #54769e;border-radius:9px;background:#213e5b;color:#f1f7ff;font-size:11px;font-weight:700;min-height:35px;padding:8px 11px}
+.fullpad-toggle:disabled{opacity:.4}
+.shell.full-pad-mode{position:fixed;inset:0;z-index:10;display:block;width:100vw;max-width:none;height:100dvh;min-height:0;margin:0;padding:0;overflow:hidden;background:#0b1423;overscroll-behavior:none;touch-action:none}
+.drawing.full-pad-drawing{position:absolute;inset:0;grid-column:auto;grid-row:auto;width:100%;height:100%;max-height:none;margin:0;padding:0;border:0;border-radius:0;overflow:hidden;background:#111e33}
+.full-pad-drawing .padwrap{position:absolute;inset:0;display:block;width:100%;height:100%;max-height:none;margin:0;padding:0;border:0;border-radius:0;aspect-ratio:auto!important;overflow:hidden}
+.full-pad-drawing .pad{display:block;width:100%;height:100%;touch-action:none}
+.fullpad-exit{position:absolute;top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));z-index:2;padding:9px 12px;background:rgba(9,24,41,.76);border:1px solid rgba(180,205,232,.5);border-radius:10px;backdrop-filter:blur(6px);box-shadow:0 4px 16px #0004;touch-action:manipulation}
+.fullpad-exit:focus-visible,.fullpad-toggle:focus-visible{outline:2px solid #b0ddff;outline-offset:2px}
+@media(max-width:420px){.pad-heading-actions{gap:5px}.pad-heading-actions .sub{display:none}}
+
+/* S Pen state is mirrored from Windows; orientation override stays in normal mode only. */
+.custom-pen-color{display:inline-block;width:32px;height:32px;border:1px solid #6284aa;border-radius:8px;padding:2px;flex:none;background:transparent}
+.orientation-label{display:flex;flex-direction:column;gap:7px;color:#b7c9df;font-size:11px;margin:14px 0 10px}
+.orientation-label select{width:100%;padding:10px 11px;border:1px solid #38516d;background:#0c1728;color:#ecf1ff;border-radius:9px;font-size:12px}
+.pressure-indicator{margin-left:auto;color:#a0ecda;font-size:11px;font-variant-numeric:tabular-nums}
+
+/* Full-pad controls are tiny icon-only buttons to maximize the pen canvas. */
+.fullpad-exit,.fullpad-mode-toggle{
+  position:absolute;top:max(8px,env(safe-area-inset-top));z-index:3;
+  width:32px;height:32px;min-height:32px;display:grid;place-items:center;
+  padding:0;border:1px solid rgba(187,209,239,.48);border-radius:9px;
+  background:rgba(10,20,35,.78);color:#f2f8ff;
+  box-shadow:0 2px 9px rgba(0,0,0,.28);backdrop-filter:blur(5px);
+  touch-action:manipulation;
+}
+.fullpad-exit{right:max(8px,env(safe-area-inset-right))}
+.fullpad-mode-toggle{right:calc(max(8px,env(safe-area-inset-right)) + 40px)}
+.fullpad-mode-toggle:focus-visible,.fullpad-exit:focus-visible{outline:2px solid #b0ddff;outline-offset:2px}
+.input-mode-choices{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:6px 0 17px}
+.input-mode-choices button{display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px;border:1px solid #365173;border-radius:9px;
+  background:#11233d;color:#aebed8;font-size:12px}
+.input-mode-choices button.selected{background:#2c4f7b;border-color:#76b8ff;color:#fff}
+
+
+/* 16:9 drawing viewport inside wider 19.5:9 / 21:9 landscape phones.
+   Blank side strips are dedicated control zones and never send pen events. */
+.drawing.full-pad-drawing{
+  display:grid;
+  grid-template-columns:minmax(50px,1fr)
+    minmax(0,min(177.777778dvh,calc(100dvw - 104px)))
+    minmax(50px,1fr);
+  grid-template-rows:minmax(0,1fr);
+  align-items:center;
+  gap:0;
+  background:#0a1322;
+}
+.full-pad-drawing .padwrap{
+  position:relative;inset:auto;grid-column:2;grid-row:1;
+  display:block;align-self:center;justify-self:center;
+  width:100%;height:auto;max-width:100%;max-height:100%;
+  aspect-ratio:16 / 9!important;margin:0;
+  border:1px solid rgba(133,172,216,.35);border-radius:3px;
+  background:#111e33;overflow:hidden;
+}
+.full-pad-drawing .pad{
+  position:absolute;inset:0;width:100%;height:100%;
+  display:block;touch-action:none;
+}
+.pad-side-tools{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;min-width:0;width:100%;max-height:100%;
+  padding:7px 3px;overflow-y:auto;overflow-x:hidden;
+  overscroll-behavior:contain;touch-action:pan-y;
+  background:#0c1b2d;z-index:2;
+}
+.pad-side-left{grid-column:1;grid-row:1}
+.pad-side-right{grid-column:3;grid-row:1}
+.pad-side-tools button,.pad-side-tools .side-color{
+  position:static;inset:auto;display:grid;place-items:center;
+  flex:0 0 auto;min-height:34px;height:34px;width:34px;min-width:34px;
+  border:1px solid #3e5877;border-radius:9px;
+  padding:0;margin:0;
+  background:#1c324b;color:#eaf4ff;
+  cursor:pointer;touch-action:manipulation;
+}
+.pad-side-tools button:disabled{opacity:.33}
+.pad-side-tools button.is-active,
+.pad-side-tools button:focus-visible{border-color:#86bdff;background:#2e5583;color:white}
+.pad-side-tools .side-color input{
+  display:block;width:30px;height:30px;
+  padding:2px;border:0;border-radius:6px;
+  background:transparent;cursor:pointer;
+}
+.pad-side-tools .fullpad-mode-toggle,
+.pad-side-tools .fullpad-exit{position:static;inset:auto;right:auto;top:auto;box-shadow:none;backdrop-filter:none}
+.pad-side-tools .fullpad-exit{background:#3a364f}
+.side-tool-separator{height:1px;width:27px;flex:none;background:#36506b;margin:2px 0}
+.side-width{flex:none;font-size:11px;font-variant-numeric:tabular-nums;color:#9fbddd;text-align:center}
+
+/* Portrait uses a rotated 9:16 central input area and horizontal tool strips.
+   It does not alter the Android activity's existing auto-rotation behavior. */
+@media(orientation:portrait){
+  .drawing.full-pad-drawing{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-rows:minmax(44px,1fr) auto minmax(44px,1fr);
+  }
+  .pad-side-tools{
+    grid-column:1;flex-direction:row;gap:5px;
+    width:100%;max-height:none;height:auto;
+    padding:6px 4px;overflow-x:auto;overflow-y:hidden;touch-action:pan-x;
+  }
+  .pad-side-left{grid-row:1;align-self:end}
+  .pad-side-right{grid-row:3;align-self:start}
+  .pad-side-tools .side-tool-separator{height:25px;width:1px;margin:0 2px}
+  .full-pad-drawing .padwrap{
+    grid-column:1;grid-row:2;
+    width:min(calc(100dvw - 12px),calc(56.25dvh - 64.6875px));
+    max-height:calc(100dvh - 115px);
+    aspect-ratio:9 / 16!important;
+  }
+}
+
+.ink-tool-picker{
+  display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:6px 0 16px;
+}
+.ink-tool-picker button{
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  border:1px solid #365173;border-radius:9px;padding:9px;
+  background:#11233d;color:#aebed8;font-size:12px;
+}
+.ink-tool-picker button.selected{
+  background:#2c4f7b;border-color:#76b8ff;color:#fff;
+}
+
+/* Mobile drawing is a transparent canvas laid over an independently selected
+   paper color. White is the default so dark ink is visible immediately. */
+.padwrap{background-color:#fff;background-image:none}
+.full-pad-drawing .padwrap{background:#fff}
+.drawing{position:relative}
+.ps-options-normal{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 17px}
+.ps-options-normal label{display:flex;align-items:center;gap:6px;color:#b9d0ec;font-size:12px}
+.ps-options-normal select,.ps-options-normal button{background:#1b3452;border:1px solid #4e6f98;
+  border-radius:9px;color:#f6fbff;padding:8px;font-size:12px}
+.ps-options-normal button{display:flex;gap:5px;align-items:center}
+.ps-options-normal .selected{background:#395a8a}
+.ps-options-normal input[type=color]{width:34px;height:33px;padding:2px;border:1px solid #6f9bd0;border-radius:8px}
+.photoshop-layer-panel{position:absolute;z-index:12;top:52px;right:max(54px,env(safe-area-inset-right));
+  width:min(360px,75vw);max-height:calc(100% - 64px);
+  display:flex;flex-direction:column;gap:6px;overflow:hidden;
+  background:#14253bea;border:1px solid #6c92c9;border-radius:12px;
+  padding:10px;color:white;box-shadow:0 9px 32px #000a;backdrop-filter:blur(10px)}
+.ps-layer-head{display:flex;align-items:center;justify-content:space-between;gap:8px;
+  border-bottom:1px solid #395474;padding:0 0 7px;font-size:13px}
+.ps-layer-head button,.ps-layer-row button,.ps-layer-add{
+  border:1px solid transparent;border-radius:6px;padding:6px;background:#213951;
+  color:#e6f3ff;display:flex;align-items:center;justify-content:center;flex:none}
+.ps-layer-list{display:flex;flex-direction:column;gap:5px;overflow-y:auto;min-height:0}
+.ps-layer-row{display:flex;gap:3px;align-items:center;padding:4px;border:1px solid #355371;border-radius:7px}
+.ps-layer-row.selected{border-color:#8fc1ff;background:#2c5278}
+.ps-layer-row .ps-layer-name{flex:1;min-width:0;justify-content:flex-start;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px}
+.ps-layer-row button:disabled{opacity:.3}
+.ps-layer-add{padding:9px;font-size:12px;gap:7px;border-color:#5b91bf}
+@media(orientation:portrait){
+  .photoshop-layer-panel{top:60px;right:8px;width:min(380px,calc(100% - 16px));max-height:65vh}
+}
+
+/* Each phone side rail is movable only inside its own 16:9 side slot.
+   The ink canvas stays untouched, preserving normalized pen/mouse mapping. */
+.pad-side-tools{transform:translateY(var(--rail-offset,0px));will-change:transform}
+.pad-side-tools .pad-rail-grip{
+  touch-action:none;user-select:none;
+  background:#35516b;border:1px dashed #b6cbe8;cursor:grab;
+}
+.pad-side-tools .pad-rail-grip:active{cursor:grabbing}
+.eraser-width-label{display:flex;justify-content:space-between;
+  gap:8px;color:#cce4ff;font-size:12px;margin:13px 0 8px}
+.eraser-width-label b{color:#ffcd9f}
+@media(orientation:portrait){
+  .pad-side-tools{transform:translateX(var(--rail-offset,0px));
+    width:max-content;max-width:100%;justify-self:center}
+}

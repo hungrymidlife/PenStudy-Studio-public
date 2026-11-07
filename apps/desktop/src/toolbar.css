@@ -1,0 +1,42 @@
+:root{font-family:"Segoe UI",system-ui,sans-serif;font-synthesis:none;color-scheme:dark}
+*{box-sizing:border-box}
+html,body,#root{width:100%;height:100%;margin:0;background:transparent;overflow:hidden}
+button,input{font:inherit}
+.ink-tools{height:58px;max-width:100%;display:flex;align-items:center;gap:7px;margin:6px;border-radius:15px;border:1px solid #383841;background:rgba(17,17,21,.97);box-shadow:0 8px 20px #0007;padding:8px 10px;color:#f5f5f8}
+.tool-icon{display:grid;place-items:center;width:27px;color:#9e9eff;flex:none}
+.tool-color{width:33px;flex:none}.tool-color input{display:block;width:31px;height:31px;min-width:31px;border:1px solid #555;border-radius:8px;background:transparent;padding:2px;cursor:pointer}
+.tool-width{display:flex;flex-direction:column;width:122px;gap:5px;font-size:10px;color:#e2e2ec}
+.tool-width input{width:100%;margin:0;accent-color:#9395ff}
+.tool-pressure{display:flex;align-items:center;gap:4px;white-space:nowrap;font-size:11px;color:#ddd;margin:0 3px}.tool-pressure input{accent-color:#9395ff}
+button{display:inline-flex;align-items:center;justify-content:center;gap:5px;height:34px;min-width:35px;padding:7px;background:#292932;border:1px solid #43434c;border-radius:8px;color:#f5f5f8;cursor:pointer}
+button:hover{background:#383845}button:focus-visible,input:focus-visible{outline:2px solid #9797fc}
+button.save{padding:7px 10px;color:#17171c;font-size:11px;font-weight:700;background:#9698ff}
+.tool-error{position:absolute;left:10px;right:10px;bottom:2px;background:#6c1828;border-radius:4px;font-size:10px;padding:3px;cursor:pointer}
+
+.tool-mode{display:flex;gap:2px;align-items:center;background:#262635;padding:3px;border-radius:9px;flex:none}
+.tool-mode button{min-width:29px;width:29px;height:29px;border:0;background:transparent;padding:5px}
+.tool-mode button.active,button.active{background:#51598b;color:#fff;border-color:#939cff}
+
+/* Move only the separate floating tool window; never unlock or resize ink. */
+.toolbar-grip{min-width:34px;width:34px;height:36px;flex:none;
+  padding:5px;border:1px solid #555875;background:#303248;color:#c6c7ff;
+  border-radius:9px;cursor:move;touch-action:none;user-select:none}
+.toolbar-grip:hover{background:#555a88;color:#fff}
+.toolbar-grip:active{cursor:grabbing}
+
+.tool-ink{display:flex;gap:2px;align-items:center;background:#302b32;
+  padding:3px;border-radius:9px;flex:none}
+.tool-ink button{min-width:29px;width:29px;height:29px;border:0;
+  background:transparent;padding:5px}
+.tool-ink button.active{background:#795d4b;border:1px solid #ffbf8e;color:#fff4ed}
+
+/* Two truly independent Tauri windows mirror the phone's left/right rails. */
+.ink-tools-left,.ink-tools-right{justify-content:flex-start;gap:6px}
+.tool-eraser-width{display:flex;flex-direction:column;width:150px;min-width:130px;
+  gap:4px;font-size:10px;color:#f5d6c0;flex:none}
+.tool-eraser-width input{width:100%;margin:0;accent-color:#ffb777}
+.tool-brush{display:flex;gap:4px;align-items:center;min-width:0;max-width:131px;
+  font-size:11px;color:#ddd}
+.tool-brush select{background:#292932;color:#fff;border:1px solid #55556d;
+  border-radius:7px;width:105px;max-width:100%;height:30px}
+.tool-brush select option{background:#171720}

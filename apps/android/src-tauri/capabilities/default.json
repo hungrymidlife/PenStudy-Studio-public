@@ -1,0 +1,15 @@
+{
+  "identifier": "default",
+  "description": "Android pad capabilities with on-demand native QR camera scanning",
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "core:default",
+    "barcode-scanner:allow-scan",
+    "barcode-scanner:allow-cancel",
+    "barcode-scanner:allow-check-permissions",
+    "barcode-scanner:allow-request-permissions",
+    "penstudy-immersive:default"
+  ]
+}

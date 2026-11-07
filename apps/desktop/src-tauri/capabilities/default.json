@@ -1,0 +1,18 @@
+{
+  "identifier": "default",
+  "description": "Desktop main/overlay capabilities",
+  "windows": [
+    "main",
+    "overlay",
+    "toolbar",
+    "toolbar-right"
+  ],
+  "permissions": [
+    "core:default",
+    "global-shortcut:allow-register",
+    "global-shortcut:allow-unregister",
+    "dialog:allow-open",
+    "core:window:allow-start-dragging",
+    "core:window:allow-start-resize-dragging"
+  ]
+}
